@@ -1,6 +1,8 @@
 package Turistguide.controller;
 
 
+import Turistguide.model.TouristAttraction;
+import Turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

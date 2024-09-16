@@ -1,5 +1,6 @@
 package Turistguide.repository;
 
+import Turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
