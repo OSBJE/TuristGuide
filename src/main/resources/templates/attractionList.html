@@ -27,6 +27,12 @@
                     <button type="submit">Edit</button>
                 </form>
             </td>
+            <td>
+                <form th:action="@{/{name}/tags(name=${TouristAttraction.name})}" method="get">
+                    <button type="submit">Tags</button>
+                </form>
+
+            </td>
 
         </tr>
         </tbody>

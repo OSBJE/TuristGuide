@@ -10,7 +10,7 @@ public class TouristAttraction {
     private String description;
     private List<Tags> tags = new ArrayList<>();
 
-    public TouristAttraction(String name, String description){
+    public TouristAttraction(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -18,6 +18,14 @@ public class TouristAttraction {
     public TouristAttraction(){
 
     }
+
+    public TouristAttraction(String name, String description, List<Tags> tags) {
+        this.name = name;
+        this.description = description;
+        this.tags = tags;
+    }
+
+
 
     ///**************** Get and Setters ***************///
 
@@ -29,8 +37,8 @@ public class TouristAttraction {
         this.name = name;
     }
 
-    public void addTag(Tags tag){
-        tags.add(tag);
+    public void setTags(List<Tags> newTags){
+        tags.addAll(newTags);
     }
 
     public String getDescription() {

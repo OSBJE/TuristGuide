@@ -1,8 +1,10 @@
 package Turistguide.repository;
 
+import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.HTML;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,9 +21,21 @@ public class TouristRepository {
     }
 
     private void populateTouristList(){
-        listOfAttractions.add(new TouristAttraction("Rundtårn", "Det er et tårn som er rundt"));
-        listOfAttractions.add(new TouristAttraction("Lille havfrue", "Chinks er vilde med hende"));
-        listOfAttractions.add(new TouristAttraction("Rosenborg", "Et flot slot, hvor den dansk kongefamile holder til"));
+        List<Tags> rundeTårnTags = new ArrayList<>();
+        List<Tags> lilleHavfrueTags = new ArrayList<>();
+        List<Tags> rosenborgTags = new ArrayList<>();
+        rundeTårnTags.add(Tags.GRATIS);
+        rundeTårnTags.add(Tags.BØRNEVENLIG);
+
+        lilleHavfrueTags.add(Tags.GRATIS);
+        lilleHavfrueTags.add(Tags.BØRNEVENLIG);
+        lilleHavfrueTags.add(Tags.KUNST);
+
+        rosenborgTags.add(Tags.KUNST);
+        rosenborgTags.add(Tags.MUSEUM);
+        listOfAttractions.add(new TouristAttraction("Rundtårn", "Det er et tårn som er rundt", rundeTårnTags));
+        listOfAttractions.add(new TouristAttraction("Lille havfrue", "Chinks er vilde med hende", lilleHavfrueTags));
+        listOfAttractions.add(new TouristAttraction("Rosenborg", "Et flot slot, hvor den dansk kongefamile holder til", rosenborgTags));
     }
 
 
@@ -80,5 +94,7 @@ public class TouristRepository {
 
         return deleteAttraction;
     }
+
+
 
 }
