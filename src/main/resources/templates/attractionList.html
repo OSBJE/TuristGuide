@@ -17,6 +17,17 @@
         <tr th:each="TouristAttraction : ${attractionList}">
             <td th:text="${TouristAttraction.name}"/>
             <td th:text="${TouristAttraction.description}"/>
+            <td>
+                <form th:action="@{/welcome/{name}/delete(name=${TouristAttraction.name})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/welcome/{name}/edit(name=${TouristAttraction.name})}" method="get">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+
         </tr>
         </tbody>
     </table>

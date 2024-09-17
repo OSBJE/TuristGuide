@@ -1,10 +1,14 @@
 package Turistguide.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TouristAttraction {
 
 
     private String name;
     private String description;
+    private List<Tags> tags = new ArrayList<>();
 
     public TouristAttraction(String name, String description){
         this.name = name;
@@ -14,8 +18,6 @@ public class TouristAttraction {
     public TouristAttraction(){
 
     }
-
-
 
     ///**************** Get and Setters ***************///
 
@@ -27,6 +29,10 @@ public class TouristAttraction {
         this.name = name;
     }
 
+    public void addTag(Tags tag){
+        tags.add(tag);
+    }
+
     public String getDescription() {
         return description;
     }
@@ -35,6 +41,9 @@ public class TouristAttraction {
         this.description = description;
     }
 
+    public List<Tags> getTags(){
+        return tags;
+    }
 
 
 }

@@ -80,9 +80,9 @@ public class TouristController {
         return "updateAttraction";
     }
 
-    //todo
-    //end-point skalvære /update - men det virker ikke.
 
+
+    //Fik det til at virker med Update begrund af hidden input i ens html fil.
     @PostMapping("/update")
     public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction objToUpdate){
         touristService.updateAttraction(objToUpdate.getName(), objToUpdate);
@@ -102,8 +102,15 @@ public class TouristController {
 
      */
 
+    //method to delete TuristAttraction
+    @PostMapping("/{name}/delete")
+    public String deleteTouristAttraction(@PathVariable String name){
+        touristService.deleteAttraction(name);
+        return "redirect:/welcome/attractionList";
+    }
 
-
+    /*
+    old code to update attractio
 
     // post attractions/delete/{name}
     // tested this with PostMan and the method works, however you can not use an URL as it sends a get method
@@ -112,6 +119,6 @@ public class TouristController {
     public ResponseEntity<String> deleteTouristAttraction(@PathVariable String attractionName){
         return new ResponseEntity<>(touristService.deleteAttraction(attractionName),HttpStatus.OK);
     }
-
+    */
 
 }
