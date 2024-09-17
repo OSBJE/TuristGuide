@@ -50,8 +50,6 @@ public class TouristController {
     public String addTouristAttraction (Model model){
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
-        model.addAttribute("Name", obj.getName());
-        model.addAttribute("Description", obj.getDescription());
         return "addAttraction";
     }
 
@@ -59,7 +57,7 @@ public class TouristController {
     @PostMapping("/addAttraction")
     public String saveTouristAttraction(@ModelAttribute TouristAttraction obj){
         touristService.addTouristAttraction(obj);
-        return "redirect:/addAttraction";
+        return "redirect:/welcome/attractionList";
     }
 
 
@@ -74,14 +72,35 @@ public class TouristController {
     }
     */
 
+    //
+    @GetMapping("/{name}/edit")
+    public String updateTouristAttraction(@PathVariable String name, Model model){
+        TouristAttraction obj = touristService.getAttraction(name);
+        model.addAttribute("objToUpdate", obj);
+        return "updateAttraction";
+    }
+
+    //todo
+    //end-point skalvære /update - men det virker ikke.
+    @PostMapping("/{name}/edit")
+    public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction obj, String name){
+        touristService.updateAttraction(name, obj);
+        return "redirect:/welcome/attractionList";
+
+    }
 
 
+    /*
+    old code to update attractio
     // post /attractions/update
     // not sure I can let it return an string when you update the obj, ill test it.
     @PutMapping("/attractions/update/{attractionName}")
     public ResponseEntity<String> updateTouristAttraction (@PathVariable String attractionName, @RequestBody TouristAttraction updateAttraction ){
         return new ResponseEntity<>(touristService.updateAttraction(attractionName, updateAttraction), HttpStatus.OK);
     }
+
+     */
+
 
 
 
