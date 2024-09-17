@@ -6,7 +6,8 @@
 </head>
 <body>
 
-    <form th:action="@{/welcome/{name}/edit}" th:object="${objToUpdate}" method="post">
+    <form th:action="@{/update}" th:object="${objToUpdate}" method="post">
+        <input type="hidden" th:field="*{name}">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{name}" readonly>
         <br><br>
