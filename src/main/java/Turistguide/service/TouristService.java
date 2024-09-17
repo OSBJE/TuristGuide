@@ -18,6 +18,8 @@ public class TouristService {
 
 
     // to create an new attraction
+    //TODO
+    // this logic should be inside TouristRepository
     public TouristAttraction addTouristAttraction(TouristAttraction attraction){
         TouristAttraction added = null;
         touristRepository.addTouristAttraction(attraction.getName(),attraction.getDescription());
