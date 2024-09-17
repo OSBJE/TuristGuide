@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Attractios</title>
+</head>
+<body>
+    <h1 th:text="${something}"></h1>
+    <table class="table table-dark">
+        <thread>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="TouristAttraction : ${attractionList}">
+            <td th:text="${TouristAttraction.name}"/>
+            <td th:text="${TouristAttraction.description}"/>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

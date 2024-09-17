@@ -6,6 +6,7 @@ import Turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,10 +23,20 @@ public class TouristController {
     }
 
     // get /attractions list
-    @GetMapping("")
+    @GetMapping("/attractionList")
+    public String getAllTouristAttractions(Model model){
+        model.addAttribute("something", "List of Tourist Attractions");
+        model.addAttribute("attractionList", touristService.allTouristAttractions());
+     return "attractionList";
+    }
+
+    /*
+    //Old code from first project
+    @GetMapping("/attractionlist")
     public ResponseEntity<List<TouristAttraction>> getAllTouristAttractions(){
         return new ResponseEntity<>(touristService.allTouristAttractions(), HttpStatus.OK);
     }
+    */
 
     // get /attractions/{name}
     @GetMapping("/attractions/{attractionName}")
@@ -33,13 +44,36 @@ public class TouristController {
         return new ResponseEntity<>(touristService.getAttraction(attractionName), HttpStatus.OK);
     }
 
-    // post /attractions/add
+
+    // This method allow us to store values when creating a new object.
+    @GetMapping("/addAttraction")
+    public String addTouristAttraction (Model model){
+        TouristAttraction obj = new TouristAttraction();
+        model.addAttribute("obj", obj);
+        model.addAttribute("Name", obj.getName());
+        model.addAttribute("Description", obj.getDescription());
+        return "addAttraction";
+    }
+
+    // This method allow us to save our stored values when creating a new object
+    @PostMapping("/addAttraction")
+    public String saveTouristAttraction(@ModelAttribute TouristAttraction obj){
+        touristService.addTouristAttraction(obj);
+        return "redirect:/addAttraction";
+    }
+
+
+
+    /*
+    //old code
     // Works tested with Testrequest1.http
     @PostMapping("/attractions/add")
     public ResponseEntity<TouristAttraction> addTouristAttraction (@RequestBody TouristAttraction attraction){
         TouristAttraction attractionToAdd = touristService.addTouristAttraction(attraction);
         return new ResponseEntity<>(attractionToAdd, HttpStatus.CREATED );
     }
+    */
+
 
 
     // post /attractions/update
