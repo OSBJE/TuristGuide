@@ -82,9 +82,9 @@ public class TouristController {
 
     //todo
     //end-point skalvære /update - men det virker ikke.
-    @PostMapping("/{name}/edit")
-    public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction obj, String name){
-        touristService.updateAttraction(name, obj);
+    @PostMapping("/update")
+    public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction obj){
+        touristService.updateAttraction(obj.getName(), obj);
         return "redirect:/welcome/attractionList";
 
     }
