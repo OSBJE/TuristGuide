@@ -1,5 +1,6 @@
 package Turistguide.repository;
 
+import Turistguide.model.City;
 import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,7 @@ import java.util.List;
 public class TouristRepository {
 
 
-    private List<TouristAttraction> listOfAttractions = new ArrayList<>();
+    private final List<TouristAttraction> listOfAttractions = new ArrayList<>();
 
     public TouristRepository(){
         populateTouristList();
@@ -33,14 +34,14 @@ public class TouristRepository {
 
         rosenborgTags.add(Tags.KUNST);
         rosenborgTags.add(Tags.MUSEUM);
-        listOfAttractions.add(new TouristAttraction("Rundtårn", "Det er et tårn som er rundt", rundeTårnTags));
-        listOfAttractions.add(new TouristAttraction("Lille havfrue", "Chinks er vilde med hende", lilleHavfrueTags));
-        listOfAttractions.add(new TouristAttraction("Rosenborg", "Et flot slot, hvor den dansk kongefamile holder til", rosenborgTags));
+        listOfAttractions.add(new TouristAttraction(City.KØBENHAVN,"Rundtårn", "Det er et tårn som er rundt", rundeTårnTags));
+        listOfAttractions.add(new TouristAttraction(City.ODENSE,"Lille havfrue", "Chinks er vilde med hende", lilleHavfrueTags));
+        listOfAttractions.add(new TouristAttraction(City.AARHUS,"Rosenborg", "Et flot slot, hvor den dansk kongefamile holder til", rosenborgTags));
     }
 
 
-    public void addTouristAttraction(String name, String description, List<Tags> tags){
-        listOfAttractions.add(new TouristAttraction(name, description, tags));
+    public void addTouristAttraction(City city, String name, String description, List<Tags> tags){
+        listOfAttractions.add(new TouristAttraction(city, name, description, tags));
     }
 
     public List<TouristAttraction> getListOfAttractions() {
@@ -62,6 +63,7 @@ public class TouristRepository {
     public String updateAttraction(String attraction, TouristAttraction update){
         String message = "nothing was updated";
 
+        City cityUpdate = update.getCity();
         String nameUpdate = update.getName();
         String descriptionUpdate = update.getDescription();
         List<Tags> tagsList = update.getTags();
@@ -71,6 +73,7 @@ public class TouristRepository {
                 obj.setName(nameUpdate);
                 obj.setDescription(descriptionUpdate);
                 obj.setTags(tagsList);
+                obj.setCity(cityUpdate);
                 return "Attraction was updated";
             }
         }

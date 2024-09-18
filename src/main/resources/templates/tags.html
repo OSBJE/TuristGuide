@@ -12,7 +12,7 @@
         </tr>
         <tbody>
         <tr th:each="tag : ${listOfTags}">
-            <td th:text="${tag}"/>
+            <td th:text="${tag.getName()}"/>
         </tr>
         </tbody>
     </table>

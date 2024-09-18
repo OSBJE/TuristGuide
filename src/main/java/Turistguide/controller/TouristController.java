@@ -1,6 +1,7 @@
 package Turistguide.controller;
 
 
+import Turistguide.model.City;
 import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import Turistguide.service.TouristService;
@@ -53,6 +54,7 @@ public class TouristController {
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
         model.addAttribute("tags", Arrays.asList(Tags.values()));
+        model.addAttribute("CityNames", Arrays.asList(City.values()));
         return "addAttraction";
     }
 
@@ -81,6 +83,7 @@ public class TouristController {
         TouristAttraction obj = touristService.getAttraction(name);
         model.addAttribute("objToUpdate", obj);
         model.addAttribute("tagsList", Arrays.asList(Tags.values()));
+        model.addAttribute("CityNames", Arrays.asList(City.values()));
         return "updateAttraction";
     }
 

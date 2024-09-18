@@ -12,6 +12,12 @@
         <label for="description">Description</label>
         <input type="text" id="description" th:field="*{description}">
         <br><br>
+        <label for="city">City</label>
+        <select id="city" name="CityNames" th:field="*{city}">
+            <option th:each=" city : ${CityNames}" th:value="${city}" th:text="${city.getName()}">
+            </option>
+        </select>
+        <br><br>
         <label for="tags">Tags</label>
         <th:block th:each="tag : ${tags}">
             <input type="checkbox" id="tags" th:field="*{tags}" th:value="${tag}" th:text="${tag.getName()}"/>

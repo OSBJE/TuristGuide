@@ -5,29 +5,33 @@ import java.util.List;
 
 public class TouristAttraction {
 
-
+    private City city;
     private String name;
     private String description;
     private List<Tags> tags = new ArrayList<>();
 
-    public TouristAttraction(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public TouristAttraction(){
-
-    }
-
-    public TouristAttraction(String name, String description, List<Tags> tags) {
+    public TouristAttraction(City city, String name, String description, List<Tags> tags) {
+        this.city = city;
         this.name = name;
         this.description = description;
         this.tags = tags;
     }
 
+    //TODO
+    // Some logic there makes sure you cannot add blank names and descriptions
+    public TouristAttraction(){
+    }
 
 
     ///**************** Get and Setters ***************///
+
+    public City getCity(){
+        return city;
+    }
+
+    public void setCity(City city){
+        this.city = city;
+    }
 
     public String getName() {
         return name;
@@ -37,13 +41,13 @@ public class TouristAttraction {
         this.name = name;
     }
 
-
-    //todo
-    // we have to update addTag og setTags
     public void setTags(List<Tags> tag) {
         tags = tag;
     }
 
+    public List<Tags> getTags(){
+        return tags;
+    }
 
     public String getDescription() {
         return description;
@@ -53,9 +57,7 @@ public class TouristAttraction {
         this.description = description;
     }
 
-    public List<Tags> getTags(){
-        return tags;
-    }
+
 
 
 }

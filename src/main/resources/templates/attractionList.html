@@ -9,12 +9,14 @@
     <table class="table table-dark">
         <thread>
             <tr>
+                <th scope="col">City</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
             </tr>
         </thread>
         <tbody>
         <tr th:each="TouristAttraction : ${attractionList}">
+            <td th:text="${TouristAttraction.getCity().getName()}">
             <td th:text="${TouristAttraction.name}"/>
             <td th:text="${TouristAttraction.description}"/>
             <td>
