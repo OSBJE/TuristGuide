@@ -1,7 +1,7 @@
 package Turistguide.service;
 
 
-import Turistguide.model.Tags;
+
 import Turistguide.model.TouristAttraction;
 import Turistguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;

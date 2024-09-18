@@ -4,7 +4,7 @@ import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.HTML;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

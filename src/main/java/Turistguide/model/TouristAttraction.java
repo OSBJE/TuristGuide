@@ -37,6 +37,10 @@ public class TouristAttraction {
         this.name = name;
     }
 
+    public void addTag(Tags tag) {
+        tags.add(tag);
+    }
+
     public void setTags(List<Tags> newTags){
         tags.addAll(newTags);
     }
