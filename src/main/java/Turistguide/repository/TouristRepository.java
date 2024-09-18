@@ -39,8 +39,8 @@ public class TouristRepository {
     }
 
 
-    public void addTouristAttraction(String name, String description){
-        listOfAttractions.add(new TouristAttraction(name, description));
+    public void addTouristAttraction(String name, String description, List<Tags> tags){
+        listOfAttractions.add(new TouristAttraction(name, description, tags));
     }
 
     public List<TouristAttraction> getListOfAttractions() {
