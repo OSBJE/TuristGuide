@@ -1,6 +1,7 @@
 package Turistguide.service;
 
 
+
 import Turistguide.model.TouristAttraction;
 import Turistguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,7 @@ public class TouristService {
     public String deleteAttraction(String name){
         return touristRepository.deleteAttraction(name);
     }
+
 
 
 }

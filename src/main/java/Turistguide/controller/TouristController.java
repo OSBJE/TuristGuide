@@ -1,6 +1,7 @@
 package Turistguide.controller;
 
 
+import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import Turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -50,6 +52,7 @@ public class TouristController {
     public String addTouristAttraction (Model model){
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
+        model.addAttribute("tags", Arrays.asList(Tags.values()));
         return "addAttraction";
     }
 
@@ -91,6 +94,7 @@ public class TouristController {
     }
 
 
+
     /*
     old code to update attractio
     // post /attractions/update
@@ -120,5 +124,20 @@ public class TouristController {
         return new ResponseEntity<>(touristService.deleteAttraction(attractionName),HttpStatus.OK);
     }
     */
+
+    @GetMapping("/{name}/tags")
+    public String getTouristAttractionTags(@PathVariable String name, Model model){
+        TouristAttraction obj = touristService.getAttraction(name);
+        List<Tags> listOfTags = obj.getTags();
+        model.addAttribute("listOfTags", listOfTags);
+        return "tags";
+    }
+
+
+
+
+
+
+
 
 }
