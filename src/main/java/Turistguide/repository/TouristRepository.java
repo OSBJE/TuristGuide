@@ -64,11 +64,13 @@ public class TouristRepository {
 
         String nameUpdate = update.getName();
         String descriptionUpdate = update.getDescription();
+        List<Tags> tagsList = update.getTags();
 
         for (TouristAttraction obj : listOfAttractions){
             if (obj.getName().equals(attraction)) {
                 obj.setName(nameUpdate);
                 obj.setDescription(descriptionUpdate);
+                obj.setTags(tagsList);
                 return "Attraction was updated";
             }
         }

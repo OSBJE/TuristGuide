@@ -37,13 +37,13 @@ public class TouristAttraction {
         this.name = name;
     }
 
-    public void addTag(Tags tag) {
-        tags.add(tag);
+
+    //todo
+    // we have to update addTag og setTags
+    public void setTags(List<Tags> tag) {
+        tags = tag;
     }
 
-    public void setTags(List<Tags> newTags){
-        tags.addAll(newTags);
-    }
 
     public String getDescription() {
         return description;

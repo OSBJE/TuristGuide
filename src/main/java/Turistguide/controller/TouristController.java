@@ -80,6 +80,7 @@ public class TouristController {
     public String updateTouristAttraction(@PathVariable String name, Model model){
         TouristAttraction obj = touristService.getAttraction(name);
         model.addAttribute("objToUpdate", obj);
+        model.addAttribute("tagsList", Arrays.asList(Tags.values()));
         return "updateAttraction";
     }
 
