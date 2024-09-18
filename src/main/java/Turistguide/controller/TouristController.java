@@ -1,6 +1,8 @@
 package Turistguide.controller;
 
 
+import Turistguide.model.City;
+import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import Turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -50,6 +53,8 @@ public class TouristController {
     public String addTouristAttraction (Model model){
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
+        model.addAttribute("tags", Arrays.asList(Tags.values()));
+        model.addAttribute("CityNames", Arrays.asList(City.values()));
         return "addAttraction";
     }
 
@@ -77,17 +82,21 @@ public class TouristController {
     public String updateTouristAttraction(@PathVariable String name, Model model){
         TouristAttraction obj = touristService.getAttraction(name);
         model.addAttribute("objToUpdate", obj);
+        model.addAttribute("tagsList", Arrays.asList(Tags.values()));
+        model.addAttribute("CityNames", Arrays.asList(City.values()));
         return "updateAttraction";
     }
 
-    //todo
-    //end-point skalvære /update - men det virker ikke.
+
+
+    //Fik det til at virker med Update begrund af hidden input i ens html fil.
     @PostMapping("/update")
-    public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction obj){
-        touristService.updateAttraction(obj.getName(), obj);
+    public String saveUpdateTouristAttraction(@ModelAttribute TouristAttraction objToUpdate){
+        touristService.updateAttraction(objToUpdate.getName(), objToUpdate);
         return "redirect:/welcome/attractionList";
 
     }
+
 
 
     /*
@@ -101,8 +110,15 @@ public class TouristController {
 
      */
 
+    //method to delete TuristAttraction
+    @PostMapping("/{name}/delete")
+    public String deleteTouristAttraction(@PathVariable String name){
+        touristService.deleteAttraction(name);
+        return "redirect:/welcome/attractionList";
+    }
 
-
+    /*
+    old code to update attractio
 
     // post attractions/delete/{name}
     // tested this with PostMan and the method works, however you can not use an URL as it sends a get method
@@ -111,6 +127,21 @@ public class TouristController {
     public ResponseEntity<String> deleteTouristAttraction(@PathVariable String attractionName){
         return new ResponseEntity<>(touristService.deleteAttraction(attractionName),HttpStatus.OK);
     }
+    */
+
+    @GetMapping("/{name}/tags")
+    public String getTouristAttractionTags(@PathVariable String name, Model model){
+        TouristAttraction obj = touristService.getAttraction(name);
+        List<Tags> listOfTags = obj.getTags();
+        model.addAttribute("listOfTags", listOfTags);
+        return "tags";
+    }
+
+
+
+
+
+
 
 
 }

@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <h1 th:text="${name}"> Tags</h1>
+    <table>
+        <tr>
+            <th scope="col">Tags</th>
+        </tr>
+        <tbody>
+        <tr th:each="tag : ${listOfTags}">
+            <td th:text="${tag.getName()}"/>
+        </tr>
+        </tbody>
+    </table>
+
+    <form th:action="@{/welcome/attractionList}" method="get">
+        <button type="submit">Go back</button>
+    </form>
 
 </body>
 </html>

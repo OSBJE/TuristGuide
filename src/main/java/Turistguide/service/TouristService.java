@@ -1,6 +1,7 @@
 package Turistguide.service;
 
 
+
 import Turistguide.model.TouristAttraction;
 import Turistguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class TouristService {
     // this logic should be inside TouristRepository
     public TouristAttraction addTouristAttraction(TouristAttraction attraction){
         TouristAttraction added = null;
-        touristRepository.addTouristAttraction(attraction.getName(),attraction.getDescription());
+        touristRepository.addTouristAttraction(attraction.getCity(), attraction.getName(),attraction.getDescription(), attraction.getTags());
         added = touristRepository.getAttraction(attraction.getName());
         return added;
     }
@@ -48,6 +49,7 @@ public class TouristService {
     public String deleteAttraction(String name){
         return touristRepository.deleteAttraction(name);
     }
+
 
 
 }
