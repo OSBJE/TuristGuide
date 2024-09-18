@@ -94,6 +94,7 @@ public class TouristController {
     }
 
 
+
     /*
     old code to update attractio
     // post /attractions/update
@@ -123,5 +124,20 @@ public class TouristController {
         return new ResponseEntity<>(touristService.deleteAttraction(attractionName),HttpStatus.OK);
     }
     */
+
+    @GetMapping("/{name}/tags")
+    public String getTouristAttractionTags(@PathVariable String name, Model model){
+        TouristAttraction obj = touristService.getAttraction(name);
+        List<Tags> listOfTags = obj.getTags();
+        model.addAttribute("listOfTags", listOfTags);
+        return "tags";
+    }
+
+
+
+
+
+
+
 
 }
