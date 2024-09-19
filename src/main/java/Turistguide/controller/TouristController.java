@@ -59,7 +59,7 @@ public class TouristController {
     }
 
     // This method allow us to save our stored values when creating a new object
-    @PostMapping("/addAttraction")
+    @PostMapping("/save")
     public String saveTouristAttraction(@ModelAttribute TouristAttraction obj){
         touristService.addTouristAttraction(obj);
         return "redirect:/welcome/attractionList";
