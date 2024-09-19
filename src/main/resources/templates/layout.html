@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title th:text="${pageTitle}">Page Title</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<!-- header -->
+<header th:fragment="header">
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/welcome/attractionList}">Attractions</a></li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </nav>
+</header>
+
+<!-- main content -->
+<main>
+  <div class="main-content" th:replace="~{::content}"></div>
+</main>
+
+<!-- footer -->
+<footer th:fragment="footer">
+  <h5>DataMasters</h5>
+  <p>We are a firm, which makes very bad IT-Solutions just for you</p>
+  <h5>Products</h5>
+  <p>Turistbusses</p>
+  <p>Giftcards</p>
+  <h5>Contact</h5>
+  <p>Guldbergsgade 29N, 2200 København</p>
+  <p>DataMasters@DM.com</p>
+  <p>+45 69 69 69 69</p>
+  <p>Kingdom of Denmark</p>
+</footer>
+</body>
+</html>
