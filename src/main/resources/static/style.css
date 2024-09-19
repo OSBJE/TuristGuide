@@ -10,6 +10,7 @@ body {
     line-height: 1.6;
     background-color: #f0f0f0;
     color: #333;
+
 }
 
 /* Header and Navigation */
@@ -135,8 +136,77 @@ footer p:last-child {
 }
 
 .main-content {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    padding-top: 60px;
+    padding-bottom: 30px;
+    width: 100%;
 }
+
+.form-group {
+    display:flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+.form-group label {
+    width: 100px;
+    margin-right: 10px;
+    text-align: left;
+    padding-bottom: 12px;
+}
+
+.text-input, .select-dropdown{
+    width: 200px;
+    height: 30px;
+    padding: 1px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    width: 100%;
+    max-width: 600px;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.checkbox-group label {
+    margin-right: 20px;
+    text-align: center;
+}
+
+.main-content button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 18px;
+    width: 200px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+}
+
+.title {
+    padding-bottom: 40px;
+}
+
+
 
 
