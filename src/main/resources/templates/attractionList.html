@@ -7,19 +7,23 @@
 </head>
 <body>
 
+<div>
 <main class="table">  <!-- main means it is unik to this HTML file -->
     <section class="table_header">
-        <h1>List over our attractions</h1>
+        <h1>List of Tourist Attractions</h1>
     </section>
 
     <section class="table_body">
-        <h1 th:text="${something}"></h1>
+        <!-- <h1 th:text="${something}"></h1> -->
         <table class="table table-dark">
             <thead>
                 <tr>
                     <th scope="col">City</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col" class="button">Delete</th>
+                    <th scope="col" class="button">Edit</th>
+                    <th scope="col" class="button">Tags</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,11 +54,14 @@
     </section>
 
 </main>
+</div>
 
-
+<div>
     <form th:action="@{/welcome/addAttraction}" method="get">
-        <button type="submit">Add Attraction </button>
+        <button class="submitButton" type="submit">Add Attraction </button>
     </form>
+</div>
+
 
 </body>
 </html>
