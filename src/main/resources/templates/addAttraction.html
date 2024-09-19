@@ -9,7 +9,6 @@
     <div class="main-content" th:fragment="content">
         <h1 class="title">Add a new attraction</h1>
     <form th:action="@{/welcome/save}" th:object="${obj}" method="post">
-
         <div class="form-group">
         <label for="name">Name</label>
         <input class="text-input" type="text" id="name" th:field="*{name}">
