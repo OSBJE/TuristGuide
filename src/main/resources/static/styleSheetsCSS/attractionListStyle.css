@@ -1,0 +1,45 @@
+
+/* det her gør det hele ser pænere ud  i selv tablen / siden*/
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+
+body{
+    min-height: 100vh;
+    background: url(../images/backgroundAttractionList.jpg)center / cover /*#ffcb05*/;
+
+    display: flex;
+    justify-content: center; /* Sætter vores table i midten*/
+    align-items: center;
+}
+
+
+/*
+td img {
+    width: 36px;
+    height: 30px;
+    margin-right: 0.5rem;
+    border-radius: 40%;
+
+    vertical-align: middle;
+     }
+*/
+
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+
+    backdrop-filter: blur(7px);
+
+}
+table, th, td {
+    padding:  1rem; /* Det her gør man spacer den ud over side*/
+
+}
