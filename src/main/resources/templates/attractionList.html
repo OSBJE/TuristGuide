@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <title>List of Attractions</title>
     <link rel="stylesheet" href="/styleSheetsCSS/attractionListStyle.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
 
-<div>
+<body>
+<div th:replace="~{layout :: header}"></div>
+
+<div class="list">
 <main class="table">  <!-- main means it is unik to this HTML file -->
     <section class="table_header">
         <h1>List of Tourist Attractions</h1>
@@ -54,14 +57,15 @@
     </section>
 
 </main>
-</div>
 
-<div>
+
     <form th:action="@{/welcome/addAttraction}" method="get">
         <button class="submitButton" type="submit">Add Attraction </button>
     </form>
 </div>
 
+<div th:replace="~{layout :: footer}"></div>
 
 </body>
+
 </html>
