@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="~{layout :: head}">
 </head>
 <body>
+    <div class="wrapper">
+    <div th:replace="~{layout :: header}"></div>
 
+    <div th:fragment="content" class="content">
     <form th:action="@{/welcome/update}" th:object="${objToUpdate}" method="post">
 
         <!--
@@ -30,9 +31,11 @@
         </th:block>
         <br><br>
 
-
         <button type="submit">Finish</button>
     </form>
+    </div>
 
+    <div th:replace="~{layout :: footer}"></div>
+    </div>
 </body>
 </html>

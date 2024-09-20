@@ -3,10 +3,10 @@
 <head th:replace="~{layout :: head}">
 </head>
 <body>
-
+<div class="wrapper">
     <div th:replace="~{layout :: header}"></div>
 
-    <div th:fragment="content">
+    <div th:fragment="content" class="content">
     <form th:action="@{/welcome/addAttraction}" th:object="${obj}" method="post">
         <label for="name">Name</label>
         <input type="text" id="name" th:field="*{name}">
@@ -26,9 +26,10 @@
         </th:block>
         <button type="submit">Finish</button>
     </form>
+
     </div>
 
     <div th:replace="~{layout :: footer}"></div>
-
+</div>
 </body>
 </html>
