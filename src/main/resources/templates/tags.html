@@ -6,7 +6,7 @@
 <div class="wrapper">
     <div th:replace="~{layout :: header}"></div>
 
-    <div th:fragment="content" class="content">
+    <div class="main-content" th:fragment="content">
     <h1 th:text="${name}"> Tags</h1>
     <table>
         <tr>
@@ -18,10 +18,7 @@
         </tr>
         </tbody>
     </table>
-
-    <form th:action="@{/welcome/attractionList}" method="get">
-        <button type="submit">Go back</button>
-    </form>
+        <a class="button-link" href="/welcome/attractionList">Go back</a>
     </div>
     <div th:replace="~{layout :: footer}"></div>
 </div>

@@ -207,18 +207,60 @@ footer p:last-child {
     text-align: center;
 }
 
-.main-content button {
+.main-content button:hover, .button-link:hover{
+    background-color: #333;
+    transition: 0.7s;
+    color: white;
+}
+
+.main-content button, .button-link {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
     font-size: 18px;
+    text-align: center;
+    text-decoration: none;
     width: 200px;
     height: 40px;
-    background-color: #333;
+    background-color: #ffcb05;
     border-radius: 8px;
     cursor: pointer;
-    color: white;
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
 }
+
+.widenpic, .picture1 {
+    margin-bottom: 40px; /* Keep margin if needed */
+    padding: 0;          /* Remove padding to avoid spacing issues */
+    background-color: transparent; /* No background color */
+    border-radius: 0;    /* Remove border radius */
+    box-shadow: none;     /* Remove box shadow */
+    display: block;       /* Make it block-level to take full width */
+    width: auto;          /* Allow it to adapt to the content */
+}
+
+/* Specific styling for images */
+.widenpic img{
+    width: 90vw;             /* Set the width to 80% of the viewport width */
+    height: 900px;            /* Maintain aspect ratio */
+    object-fit: cover;       /* Ensure the image covers the area */
+    margin-left: calc(-45vw + 50%); /* Center the image */
+    border-radius: 0;        /* Remove border radius */
+}
+
+.picture1 img {
+    width: 60vw;             /* Set the width to 80% of the viewport width */
+    height: auto;            /* Maintain aspect ratio */
+    object-fit: cover;       /* Ensure the image covers the area */
+    margin-left: calc(-30vw + 50%); /* Center the image */
+    border-radius: 0;        /* Remove border radius */
+}
+
+.widenpic:hover, .picture1:hover {
+    transform: none;
+}
+
 
 .title {
     padding-bottom: 40px;
