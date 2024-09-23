@@ -4,6 +4,7 @@
 </head>
 <body>
 
+<div class="wrapper">
     <div th:replace="~{layout :: header}"></div>
 
     <div class="main-content" th:fragment="content">
@@ -36,8 +37,10 @@
         <button type="submit">Finish</button>
     </form>
     </div>
+  </div>
+
 
     <div th:replace="~{layout :: footer}"></div>
-
+</div>
 </body>
 </html>
