@@ -12,7 +12,6 @@ body, html {
     line-height: 1.6;
     background-color: #f0f0f0;
     color: #333;
-
     display: flex;
     flex-direction: column;
 }
@@ -42,13 +41,17 @@ nav ul li {
     font-size: 18px;
 }
 
+a {
+    text-decoration: none;
+}
+
 nav ul li a, nav ul li {
     color: white;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-nav ul li:hover {
+nav ul li:hover{
     font-weight: bold;
     color: #ffcb05;
 }
@@ -105,6 +108,7 @@ main a:hover {
     color: #ffcb05;
     text-decoration: underline;
 }
+
 
 /* Footer Styling */
 footer {
@@ -231,30 +235,30 @@ footer p:last-child {
 }
 
 .widenpic, .picture1 {
-    margin-bottom: 40px; /* Keep margin if needed */
-    padding: 0;          /* Remove padding to avoid spacing issues */
-    background-color: transparent; /* No background color */
-    border-radius: 0;    /* Remove border radius */
-    box-shadow: none;     /* Remove box shadow */
-    display: block;       /* Make it block-level to take full width */
-    width: auto;          /* Allow it to adapt to the content */
+    margin-bottom: 40px;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+    width: auto;
 }
 
-/* Specific styling for images */
+
 .widenpic img{
-    width: 90vw;             /* Set the width to 80% of the viewport width */
-    height: 900px;            /* Maintain aspect ratio */
-    object-fit: cover;       /* Ensure the image covers the area */
-    margin-left: calc(-45vw + 50%); /* Center the image */
-    border-radius: 0;        /* Remove border radius */
+    width: 90vw;
+    height: 900px;
+    object-fit: cover;
+    margin-left: calc(-45vw + 50%);
+    border-radius: 0;
 }
 
 .picture1 img {
-    width: 60vw;             /* Set the width to 80% of the viewport width */
-    height: auto;            /* Maintain aspect ratio */
-    object-fit: cover;       /* Ensure the image covers the area */
-    margin-left: calc(-30vw + 50%); /* Center the image */
-    border-radius: 0;        /* Remove border radius */
+    width: 60vw;
+    height: auto;
+    object-fit: cover;
+    margin-left: calc(-30vw + 50%);
+    border-radius: 0;
 }
 
 .widenpic:hover, .picture1:hover {
