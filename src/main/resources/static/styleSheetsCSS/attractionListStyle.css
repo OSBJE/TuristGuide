@@ -1,0 +1,140 @@
+
+/* det her gør det hele ser pænere ud  i selv tablen / siden*/
+*{
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+
+
+.list{
+    min-height: 100vh;
+    background: url(../images/backgroundAttractionList.jpg)center / cover /*#ffcb05*/;
+
+    display: flex;
+    justify-content: center; /* Sætter vores table i midten*/
+    align-items: center;
+}
+
+
+/*
+td img {
+    width: 36px;
+    height: 30px;
+    margin-right: 0.5rem;
+    border-radius: 40%;
+
+    vertical-align: middle;
+     }
+*/
+
+main.table{
+    width: 82vw;
+    height: 90vh;
+    background-color: #fff5;
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+
+    overflow: hidden;
+}
+
+.table_header{
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+}
+
+.table_body{
+    width: 95%;
+    max-height: calc(89%- 1.6rem);
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+}
+
+.table_body::-webkit-scrollbar{
+    width: .5rem;
+    height: 0.5rem;
+}
+
+.table_body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table_body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+}
+
+table{
+    width: 100%;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding:  1rem; /* Det her gør man spacer den ud over side*/
+    text-align: left;
+}
+
+thead th{
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+}
+
+.button{
+    text-align: center;
+}
+
+tbody tr:nth-child(even){
+    background-color: #0000000b;
+}
+
+tbody tr:hover {
+    background-color: lightgrey;
+}
+
+@media (max-width: 1000px){
+    td:not(:first-of-type){
+        min-width: 12.1rem;
+    }
+}
+
+button {
+    top: 95%;
+    background-color: #ffcb05; /* color of buttom */
+    color: black;
+    border: none; /* remove border line*/
+    border-radius: 10px; /*edit the border line*/
+
+    /* how to make the buttons look*/
+    padding: 20px;
+    min-height: 15px;
+    min-width: 120px;
+}
+
+button:hover {
+    background-color: #333;
+    transition: 0.7s;
+    color: white;
+}
+
+.submitButton{
+    position: absolute;    /* Positioned relative to .page-container */
+    left: 17%;             /* Horizontal center alignment */
+    transform: translateX(-50%); /* Perfect centering */
+    padding: 10px 20px;
+    font-size: 16px;
+
+
+}

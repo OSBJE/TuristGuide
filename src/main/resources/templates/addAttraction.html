@@ -3,31 +3,42 @@
 <head th:replace="~{layout :: head}">
 </head>
 <body>
+
 <div class="wrapper">
     <div th:replace="~{layout :: header}"></div>
 
-    <div th:fragment="content" class="content">
-    <form th:action="@{/welcome/addAttraction}" th:object="${obj}" method="post">
+    <div class="main-content" th:fragment="content">
+        <h1 class="title">Add a new attraction</h1>
+    <form th:action="@{/welcome/save}" th:object="${obj}" method="post">
+        <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" th:field="*{name}">
+        <input class="text-input" type="text" id="name" th:field="*{name}">
+        </div>
         <br><br>
+        <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" id="description" th:field="*{description}">
+        <input class="text-input" type="text" id="description" th:field="*{description}">
+        </div>
         <br><br>
+        <div class="form-group">
         <label for="city">City</label>
-        <select id="city" name="CityNames" th:field="*{city}">
+        <select class="select-dropdown" id="city" name="CityNames" th:field="*{city}">
             <option th:each=" city : ${CityNames}" th:value="${city}" th:text="${city.getName()}">
             </option>
         </select>
+        </div>
         <br><br>
         <label for="tags">Tags</label>
+        <div class="checkbox-group">
         <th:block th:each="tag : ${tags}">
             <input type="checkbox" id="tags" th:field="*{tags}" th:value="${tag}" th:text="${tag.getName()}"/>
         </th:block>
+        </div>
         <button type="submit">Finish</button>
     </form>
-
     </div>
+  </div>
+
 
     <div th:replace="~{layout :: footer}"></div>
 </div>
