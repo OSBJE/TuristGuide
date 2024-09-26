@@ -87,8 +87,7 @@ public class TouristRepository {
     public String deleteAttraction(String name){
         String deleteAttraction = "object was deleted";
 
-        List<TouristAttraction> list = listOfAttractions;
-        Iterator<TouristAttraction> iterator = list.iterator();
+        Iterator<TouristAttraction> iterator = listOfAttractions.iterator();
 
         while (iterator.hasNext()){
             TouristAttraction attraction = iterator.next();

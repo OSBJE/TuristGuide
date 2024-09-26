@@ -22,10 +22,9 @@ public class TouristService {
     //TODO
     // this logic should be inside TouristRepository
     public TouristAttraction addTouristAttraction(TouristAttraction attraction){
-        TouristAttraction added = null;
         touristRepository.addTouristAttraction(attraction.getCity(), attraction.getName(),attraction.getDescription(), attraction.getTags());
-        added = touristRepository.getAttraction(attraction.getName());
-        return added;
+        return touristRepository.getAttraction(attraction.getName());
+
     }
 
     // this is to the first get all attractions to the control

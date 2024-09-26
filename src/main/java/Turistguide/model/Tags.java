@@ -8,7 +8,7 @@ public enum Tags {
     MUSEUM("Museum"),
     NATUR("Natur");
 
-    private String name;
+    private final String name;
 
     Tags(String name){
         this.name=name;
