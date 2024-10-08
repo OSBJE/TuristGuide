@@ -99,6 +99,12 @@ public class TouristRepository {
         return deleteAttraction;
     }
 
+// *********************** ---------- DATABASE METHODS ------------ **************************
+
+
+
+
+
 
 
 }
