@@ -27,9 +27,18 @@ public class TouristService {
 
     }
 
+
+
     // this is to the first get all attractions to the control
+    /*
     public List<TouristAttraction> allTouristAttractions(){
         return touristRepository.getListOfAttractions();
+    }
+     */
+
+    //Database method
+    public List<TouristAttraction> allTouristAttractions(){
+        return touristRepository.getAttractions();
     }
 
 
@@ -37,6 +46,8 @@ public class TouristService {
     public TouristAttraction getAttraction(String name){
         return touristRepository.getAttraction(name);
     }
+
+
 
     //This is to update
 
