@@ -1,8 +1,7 @@
 package Turistguide.controller;
 
 
-import Turistguide.model.City;
-import Turistguide.model.Tags;
+
 import Turistguide.model.TouristAttraction;
 import Turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
@@ -46,7 +45,7 @@ public class TouristController {
     public String addTouristAttraction (Model model){
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
-        model.addAttribute("tags", Arrays.asList(Tags.values()));
+        model.addAttribute("tags", touristService.getListOfTags());
         model.addAttribute("CityNames", touristService.getListOfCities());
         return "addAttraction";
     }
@@ -64,7 +63,7 @@ public class TouristController {
     public String updateTouristAttraction(@PathVariable String name, Model model){
         TouristAttraction obj = touristService.getAttraction(name);
         model.addAttribute("objToUpdate", obj);
-        model.addAttribute("tagsList", Arrays.asList(Tags.values()));
+        model.addAttribute("tagsList", touristService.getListOfTags());
         model.addAttribute("CityNames", touristService.getListOfCities());
         return "updateAttraction";
     }
@@ -91,7 +90,7 @@ public class TouristController {
     @GetMapping("/{name}/tags")
     public String getTouristAttractionTags(@PathVariable String name, Model model){
         TouristAttraction obj = touristService.getAttraction(name);
-        List<Tags> listOfTags = obj.getTags();
+        List<String> listOfTags = obj.getTags();
         model.addAttribute("listOfTags", listOfTags);
         return "tags";
     }

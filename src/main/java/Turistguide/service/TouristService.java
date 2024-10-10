@@ -36,7 +36,7 @@ public class TouristService {
 
     // this is to get specific attraction to the controller.
     public TouristAttraction getAttraction(String name){
-        return touristRepository.getAttraction(name);
+        return touristRepository.getAttractionDb(name);
     }
 
     //This is to update
@@ -53,6 +53,10 @@ public class TouristService {
 
     public List<String> getListOfCities(){
         return touristRepository.getListOfCities();
+    }
+
+    public List<String> getListOfTags(){
+        return touristRepository.getListOfTags();
     }
 
 }

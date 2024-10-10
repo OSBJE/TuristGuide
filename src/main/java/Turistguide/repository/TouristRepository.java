@@ -1,16 +1,12 @@
 package Turistguide.repository;
 
-import Turistguide.model.City;
-import Turistguide.model.Tags;
 import Turistguide.model.TouristAttraction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 @Repository
@@ -27,19 +23,76 @@ public class TouristRepository {
 
 
     public TouristRepository(){
-        this.listOfAttractions = getAttractions();
+
     }
 
-    public void addTouristAttraction(String city, String name, String description, List<Tags> tags){
-        listOfAttractions.add(new TouristAttraction(city, name, description, tags));
+
+    //TODO not done yet - we skal match navn til talID
+    public void addTouristAttraction(String city, String name, String description, List<String> tags){
+        int primaryKeyDB;
+
+        try {
+            Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+
+            String sqlString = "insert into attraction (Name, CityID, Description ) VALUES(?,(SELECT CityID from city where name = ?),?)";
+
+            PreparedStatement stmt = con.prepareStatement(sqlString, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1,name);
+            stmt.setString(2,city);
+            stmt.setString(3,description);
+
+            primaryKeyDB = stmt.executeUpdate();
+            Map<String, Integer> pairList = getTagsId();
+
+            if(!tags.isEmpty()){
+                for(String tag : tags){
+
+                    String sqlString2 = "insert into attraction_tag (AttractionID, tagID) VALUES (?, ?)";
+
+                    PreparedStatement stmt2 = con.prepareStatement(sqlString2);
+                    stmt2.setInt(primaryKeyDB,pairList.get(tag));
+                    stmt2.executeQuery();
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
-    public List<TouristAttraction> getListOfAttractions() {
-        return listOfAttractions;
+    public Map<String, Integer> getTagsId(){
+        Map<String, Integer> pairList = new HashMap<>();
+
+        try {
+            Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+
+            String sqlString = "SELECT * FROM tags";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+
+            ResultSet rls = stmt.executeQuery();
+
+
+            while(rls.next()){
+                String name = rls.getString("name");
+                int tagID = rls.getInt("TagID");
+
+                pairList.put(name,tagID);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return pairList;
+
     }
+
 
 
     public TouristAttraction getAttraction(String name){
+
+
         TouristAttraction attraction = null;
         for (TouristAttraction obj : listOfAttractions){
             if (name.equals(obj.getName())){
@@ -51,15 +104,13 @@ public class TouristRepository {
     }
 
 
-
-
     public String updateAttraction(String attraction, TouristAttraction update){
         String message = "nothing was updated";
 
         String cityUpdate = update.getCity();
         String nameUpdate = update.getName();
         String descriptionUpdate = update.getDescription();
-        List<Tags> tagsList = update.getTags();
+        List<String> tagsList = update.getTags();
 
         for (TouristAttraction obj : listOfAttractions){
             if (obj.getName().equals(attraction)) {
@@ -113,8 +164,6 @@ public class TouristRepository {
                 String cityName = resultSet.getString("city_name");
                 String tagName = resultSet.getString("tag_name");
 
-                //converting cityName and tagName to enums to for the touristAttraction object
-                Tags tag = Tags.valueOf(tagName.toUpperCase());
 
                 //checking to see if the touristAttraction already exists
                 TouristAttraction attraction = null;
@@ -131,7 +180,7 @@ public class TouristRepository {
 
                 //adding the tags to the tag list
                 if (tagName != null) {
-                    attraction.getTags().add(tag);
+                    attraction.getTags().add(tagName);
                 }
 
             }
@@ -167,14 +216,13 @@ public class TouristRepository {
                     String cityName = resultSet.getString("city_name");
                     String tagName = resultSet.getString("tag_name");
 
-                    Tags tag = Tags.valueOf(tagName.toUpperCase());
 
                     if (attraction == null) {
                         attraction = new TouristAttraction(cityName, attractionName, description, new ArrayList<>());
                     }
 
                     if (tagName != null) {
-                        attraction.getTags().add(tag);
+                        attraction.getTags().add(tagName);
                 }
             }
         } catch(SQLException e) {
@@ -205,13 +253,26 @@ public class TouristRepository {
         return list;
     }
 
+    public List<String> getListOfTags(){
+        List<String> list = new ArrayList<>();
 
-    //*******
+        try(Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword)){
 
-    public void logEnvVariables() {
-        System.out.println("DEV_DB_URL: " + dbUrl);
-        System.out.println("DEV_DB_USER: " + dbUsername);
-        System.out.println("DEV_DB_PASSWORD: " + dbPassword);
+            String sqlString = "SELECT name FROM tags";
+
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                list.add(rs.getString("name"));
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
+
 
 }
