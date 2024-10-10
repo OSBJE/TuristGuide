@@ -5,12 +5,12 @@ import java.util.List;
 
 public class TouristAttraction {
 
-    private City city;
+    private String city;
     private String name;
     private String description;
-    private List<Tags> tags = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
 
-    public TouristAttraction(City city, String name, String description, List<Tags> tags) {
+    public TouristAttraction(String city, String name, String description, List<String> tags) {
         this.city = city;
         this.name = name;
         this.description = description;
@@ -25,11 +25,11 @@ public class TouristAttraction {
 
     ///**************** Get and Setters ***************///
 
-    public City getCity(){
+    public String getCity(){
         return city;
     }
 
-    public void setCity(City city){
+    public void setCity(String city){
         this.city = city;
     }
 
@@ -41,11 +41,11 @@ public class TouristAttraction {
         this.name = name;
     }
 
-    public void setTags(List<Tags> tag) {
+    public void setTags(List<String> tag) {
         tags = tag;
     }
 
-    public List<Tags> getTags(){
+    public List<String> getTags(){
         return tags;
     }
 

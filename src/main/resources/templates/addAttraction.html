@@ -21,7 +21,7 @@
         <div class="form-group">
         <label for="city">City</label>
         <select class="select-dropdown" id="city" name="CityNames" th:field="*{city}">
-            <option th:each=" city : ${CityNames}" th:value="${city}" th:text="${city.getName()}">
+            <option th:each=" city : ${CityNames}" th:value="${city}" th:text="${city}">
             </option>
         </select>
         </div>
@@ -29,7 +29,7 @@
         <label for="tags">Tags</label>
         <div class="checkbox-group">
         <th:block th:each="tag : ${tags}">
-            <input type="checkbox" id="tags" th:field="*{tags}" th:value="${tag}" th:text="${tag.getName()}"/>
+            <input type="checkbox" id="tags" th:field="*{tags}" th:value="${tag}" th:text="${tag}"/>
         </th:block>
         </div>
         <button type="submit">Finish</button>
