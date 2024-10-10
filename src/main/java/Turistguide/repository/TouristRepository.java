@@ -29,27 +29,8 @@ public class TouristRepository {
     public TouristRepository(){
         this.listOfAttractions = getAttractions();
     }
-    /*
-    private void populateTouristList(){
-        List<Tags> rundeTårnTags = new ArrayList<>();
-        List<Tags> lilleHavfrueTags = new ArrayList<>();
-        List<Tags> rosenborgTags = new ArrayList<>();
-        rundeTårnTags.add(Tags.GRATIS);
-        rundeTårnTags.add(Tags.BØRNEVENLIG);
 
-        lilleHavfrueTags.add(Tags.GRATIS);
-        lilleHavfrueTags.add(Tags.BØRNEVENLIG);
-        lilleHavfrueTags.add(Tags.KUNST);
-
-        rosenborgTags.add(Tags.KUNST);
-        rosenborgTags.add(Tags.MUSEUM);
-        listOfAttractions.add(new TouristAttraction(City.KØBENHAVN,"Rundtårn", "Det er et tårn som er rundt", rundeTårnTags));
-        listOfAttractions.add(new TouristAttraction(City.ODENSE,"Lille havfrue", "Chinks er vilde med hende", lilleHavfrueTags));
-        listOfAttractions.add(new TouristAttraction(City.AARHUS,"Rosenborg", "Et flot slot, hvor den dansk kongefamile holder til", rosenborgTags));
-    }
-        */
-
-    public void addTouristAttraction(City city, String name, String description, List<Tags> tags){
+    public void addTouristAttraction(String city, String name, String description, List<Tags> tags){
         listOfAttractions.add(new TouristAttraction(city, name, description, tags));
     }
 
@@ -75,7 +56,7 @@ public class TouristRepository {
     public String updateAttraction(String attraction, TouristAttraction update){
         String message = "nothing was updated";
 
-        City cityUpdate = update.getCity();
+        String cityUpdate = update.getCity();
         String nameUpdate = update.getName();
         String descriptionUpdate = update.getDescription();
         List<Tags> tagsList = update.getTags();
@@ -133,7 +114,6 @@ public class TouristRepository {
                 String tagName = resultSet.getString("tag_name");
 
                 //converting cityName and tagName to enums to for the touristAttraction object
-                City city = City.valueOf(cityName.toUpperCase());
                 Tags tag = Tags.valueOf(tagName.toUpperCase());
 
                 //checking to see if the touristAttraction already exists
@@ -145,7 +125,7 @@ public class TouristRepository {
                 }
                 //if it doesnt, we create it
                 if (attraction == null){
-                    attraction = new TouristAttraction(city, attractionName, description, new ArrayList<>());
+                    attraction = new TouristAttraction(cityName, attractionName, description, new ArrayList<>());
                     touristAttractions.add(attraction);
                 }
 
@@ -187,11 +167,10 @@ public class TouristRepository {
                     String cityName = resultSet.getString("city_name");
                     String tagName = resultSet.getString("tag_name");
 
-                    City city = City.valueOf(cityName.toUpperCase());
                     Tags tag = Tags.valueOf(tagName.toUpperCase());
 
                     if (attraction == null) {
-                        attraction = new TouristAttraction(city, attractionName, description, new ArrayList<>());
+                        attraction = new TouristAttraction(cityName, attractionName, description, new ArrayList<>());
                     }
 
                     if (tagName != null) {
@@ -205,9 +184,34 @@ public class TouristRepository {
         return attraction;
     }
 
+    public List<String> getListOfCities(){
+        List<String> list = new ArrayList<>();
+
+        try(Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword)){
+
+            String sqlString = "SELECT name FROM city";
+
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                list.add(rs.getString("name"));
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 
 
+    //*******
 
-
+    public void logEnvVariables() {
+        System.out.println("DEV_DB_URL: " + dbUrl);
+        System.out.println("DEV_DB_USER: " + dbUsername);
+        System.out.println("DEV_DB_PASSWORD: " + dbPassword);
+    }
 
 }

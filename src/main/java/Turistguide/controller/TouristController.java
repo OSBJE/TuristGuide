@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/welcome")
 public class TouristController {
 
-
     private final TouristService touristService;
 
     public TouristController(TouristService service){
@@ -40,6 +39,7 @@ public class TouristController {
         return new ResponseEntity<>(touristService.getAttraction(attractionName), HttpStatus.OK);
     }
 
+    //TODO this should get out city values directly from database.
 
     // This method allow us to store values when creating a new object.
     @GetMapping("/addAttraction")
@@ -47,7 +47,7 @@ public class TouristController {
         TouristAttraction obj = new TouristAttraction();
         model.addAttribute("obj", obj);
         model.addAttribute("tags", Arrays.asList(Tags.values()));
-        model.addAttribute("CityNames", Arrays.asList(City.values()));
+        model.addAttribute("CityNames", touristService.getListOfCities());
         return "addAttraction";
     }
 
@@ -65,7 +65,7 @@ public class TouristController {
         TouristAttraction obj = touristService.getAttraction(name);
         model.addAttribute("objToUpdate", obj);
         model.addAttribute("tagsList", Arrays.asList(Tags.values()));
-        model.addAttribute("CityNames", Arrays.asList(City.values()));
+        model.addAttribute("CityNames", touristService.getListOfCities());
         return "updateAttraction";
     }
 
