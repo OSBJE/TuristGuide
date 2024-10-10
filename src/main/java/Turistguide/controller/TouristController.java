@@ -114,7 +114,7 @@ public class TouristController {
     @PostMapping("/{name}/delete")
     public String deleteTouristAttraction(@PathVariable String name){
         touristService.deleteAttraction(name);
-        return "redirect:/welcome/attractionList";
+        return "redirect:/welcome/attractionList"; //Den spørger client ikke serveren
     }
 
     /*
