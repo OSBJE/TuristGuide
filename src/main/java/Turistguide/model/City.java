@@ -5,7 +5,8 @@ public enum City {
     KØBENHAVN("København"),
     AALBORG("Aalborg"),
     AARHUS("Aarhus"),
-    ODENSE("Odense");
+    ODENSE("Odense"),
+    ROSKILDE("Roskilde");
 
     private final String name;
 

@@ -33,13 +33,6 @@ public class TouristController {
      return "attractionList";
     }
 
-    /*
-    //Old code from first project
-    @GetMapping("/attractionlist")
-    public ResponseEntity<List<TouristAttraction>> getAllTouristAttractions(){
-        return new ResponseEntity<>(touristService.allTouristAttractions(), HttpStatus.OK);
-    }
-    */
 
     // get /attractions/{name}
     @GetMapping("/attractions/{attractionName}")
@@ -66,17 +59,6 @@ public class TouristController {
     }
 
 
-
-    /*
-    //old code
-    // Works tested with Testrequest1.http
-    @PostMapping("/attractions/add")
-    public ResponseEntity<TouristAttraction> addTouristAttraction (@RequestBody TouristAttraction attraction){
-        TouristAttraction attractionToAdd = touristService.addTouristAttraction(attraction);
-        return new ResponseEntity<>(attractionToAdd, HttpStatus.CREATED );
-    }
-    */
-
     //
     @GetMapping("/{name}/edit")
     public String updateTouristAttraction(@PathVariable String name, Model model){
@@ -98,18 +80,6 @@ public class TouristController {
     }
 
 
-
-    /*
-    old code to update attractio
-    // post /attractions/update
-    // not sure I can let it return an string when you update the obj, ill test it.
-    @PutMapping("/attractions/update/{attractionName}")
-    public ResponseEntity<String> updateTouristAttraction (@PathVariable String attractionName, @RequestBody TouristAttraction updateAttraction ){
-        return new ResponseEntity<>(touristService.updateAttraction(attractionName, updateAttraction), HttpStatus.OK);
-    }
-
-     */
-
     //method to delete TuristAttraction
     @PostMapping("/{name}/delete")
     public String deleteTouristAttraction(@PathVariable String name){
@@ -117,17 +87,6 @@ public class TouristController {
         return "redirect:/welcome/attractionList";
     }
 
-    /*
-    old code to update attractio
-
-    // post attractions/delete/{name}
-    // tested this with PostMan and the method works, however you can not use an URL as it sends a get method
-    // and I have mapped it using a deleteMapping. Hence you need to send a delete request.
-    @DeleteMapping("/attractions/delete/{attractionName}")
-    public ResponseEntity<String> deleteTouristAttraction(@PathVariable String attractionName){
-        return new ResponseEntity<>(touristService.deleteAttraction(attractionName),HttpStatus.OK);
-    }
-    */
 
     @GetMapping("/{name}/tags")
     public String getTouristAttractionTags(@PathVariable String name, Model model){

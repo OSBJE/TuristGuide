@@ -23,11 +23,11 @@ public class TouristRepository {
     @Value("${spring.datasource.password}")
     private String dbPassword;
 
-    private final List<TouristAttraction> listOfAttractions = new ArrayList<>();
+    private List<TouristAttraction> listOfAttractions = new ArrayList<>();
 
 
     public TouristRepository(){
-
+        this.listOfAttractions = getAttractions();
     }
     /*
     private void populateTouristList(){
@@ -111,7 +111,7 @@ public class TouristRepository {
         return deleteAttraction;
     }
 
-// *********************** ---------- DATABASE METHODS ------------ **************************
+// *********************** ---------- DATABASE METHODS ------------ ************************** //
 
 
     //Database method to get the touristAttractions - might want to consider NOT using Enums, as this creates more code
