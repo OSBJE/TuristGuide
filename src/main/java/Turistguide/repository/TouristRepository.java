@@ -68,6 +68,7 @@ public class TouristRepository {
 
     }
 
+
     public Map<String, Integer> getTagsId(){
         Map<String, Integer> pairList = new HashMap<>();
 
@@ -92,25 +93,88 @@ public class TouristRepository {
         }
 
         return pairList;
-
     }
 
-    public String updateAttraction(String attraction, TouristAttraction update){
+    public Map<String, Integer> getCityId(){
+        Map<String, Integer> pairList = new HashMap<>();
+
+        try {
+            Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+
+            String sqlString = "SELECT * FROM city";
+            PreparedStatement stmt = con.prepareStatement(sqlString);
+
+            ResultSet rls = stmt.executeQuery();
+
+
+            while(rls.next()){
+                String name = rls.getString("name");
+                int cityID = rls.getInt("cityID");
+
+                pairList.put(name,cityID);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return pairList;
+    }
+
+
+    public String updateAttraction(String attractionName, TouristAttraction update)  {
         String message = "nothing was updated";
 
-        String cityUpdate = update.getCity();
-        String nameUpdate = update.getName();
-        String descriptionUpdate = update.getDescription();
-        List<String> tagsList = update.getTags();
 
-        for (TouristAttraction obj : listOfAttractions){
-            if (obj.getName().equals(attraction)) {
-                obj.setName(nameUpdate);
-                obj.setDescription(descriptionUpdate);
-                obj.setTags(tagsList);
-                obj.setCity(cityUpdate);
-                return "Attraction was updated";
+
+        try {
+            Connection conn = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+            String sqlAttractionID = "SELECT attractionID FROM attraction WHERE name = ?";
+            PreparedStatement stmt = conn.prepareStatement(sqlAttractionID);
+            stmt.setString(1,attractionName);
+            ResultSet rls = stmt.executeQuery();
+
+            rls.next();
+
+            int attractionID = rls.getInt(1);
+
+            Map<String, Integer> cityPairList = this.getCityId();
+
+            int cityInt = cityPairList.get(update.getCity());
+
+
+            String sqlUpdateAttraction = "UPDATE attraction SET name = ? , description = ?, cityID = ? WHERE attractionID = ?";
+            PreparedStatement stmt2 = conn.prepareStatement(sqlUpdateAttraction);
+            stmt2.setString(1, update.getName());
+            stmt2.setString(2, update.getDescription());
+            stmt2.setInt(3, cityInt);
+            stmt2.setInt(4, attractionID);
+
+            stmt2.executeUpdate();
+
+
+            Map<String, Integer> pairList = getTagsId();
+
+            if(!update.getTags().isEmpty()){
+
+                String sqlDeleteTags ="DELETE FROM attraction_tag where attractionID = ?";
+                PreparedStatement stmt3 = conn.prepareStatement(sqlDeleteTags);
+                stmt3.setInt(1, attractionID);
+                stmt3.executeUpdate();
+
+                for(String tag : update.getTags()){
+
+                    String sqlString3 = "insert into attraction_tag (AttractionID, tagID) VALUES (?, ?)";
+
+                    PreparedStatement stmt4 = conn.prepareStatement(sqlString3);
+                    stmt4.setInt(1, attractionID);
+                    stmt4.setInt(2,pairList.get(tag));
+                    stmt4.executeUpdate();
+                }
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
 
@@ -141,6 +205,20 @@ public class TouristRepository {
             PreparedStatement stmt2 = conn.prepareStatement(deleteAttraction);
             stmt2.setInt(1,primaryKeyDB);
             stmt2.executeUpdate();
+
+
+
+            String resetAutoPrimaryKey = "SELECT IFNULL(MAX(attractionID), 0) + 1 AS next_id FROM attraction";
+            PreparedStatement autoIncremt = conn.prepareStatement(resetAutoPrimaryKey);
+            ResultSet rls = autoIncremt.executeQuery();
+            rls.next();
+            int nextPrimaryKey = rls.getInt(1);
+
+            String setPrimaryKeyValue = "ALTER TABLE attraction AUTO_INCREMENT = ?";
+            PreparedStatement autoSet = conn.prepareStatement(setPrimaryKeyValue);
+            autoSet.setInt(1,nextPrimaryKey);
+            autoSet.executeUpdate();
+
 
             return  "object was deleted";
 
@@ -280,6 +358,7 @@ public class TouristRepository {
 
         return list;
     }
+
 
 
 }
