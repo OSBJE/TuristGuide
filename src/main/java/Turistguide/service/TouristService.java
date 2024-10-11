@@ -23,7 +23,7 @@ public class TouristService {
     // this logic should be inside TouristRepository
     public TouristAttraction addTouristAttraction(TouristAttraction attraction){
         touristRepository.addTouristAttraction(attraction.getCity(), attraction.getName(),attraction.getDescription(), attraction.getTags());
-        return touristRepository.getAttraction(attraction.getName());
+        return touristRepository.getAttractionDb(attraction.getName());
 
     }
 

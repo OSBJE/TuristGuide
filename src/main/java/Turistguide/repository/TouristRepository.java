@@ -27,9 +27,8 @@ public class TouristRepository {
     }
 
 
-    //TODO not done yet - we skal match navn til talID
     public void addTouristAttraction(String city, String name, String description, List<String> tags){
-        int primaryKeyDB;
+        int primaryKeyDB = 0;
 
         try {
             Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
@@ -40,9 +39,16 @@ public class TouristRepository {
             stmt.setString(1,name);
             stmt.setString(2,city);
             stmt.setString(3,description);
+            stmt.executeUpdate();
 
-            primaryKeyDB = stmt.executeUpdate();
+            ResultSet returnPrimaryKey = stmt.getGeneratedKeys();
+
+            if (returnPrimaryKey.next()){
+                primaryKeyDB = returnPrimaryKey.getInt(1);
+            }
+
             Map<String, Integer> pairList = getTagsId();
+
 
             if(!tags.isEmpty()){
                 for(String tag : tags){
@@ -50,8 +56,9 @@ public class TouristRepository {
                     String sqlString2 = "insert into attraction_tag (AttractionID, tagID) VALUES (?, ?)";
 
                     PreparedStatement stmt2 = con.prepareStatement(sqlString2);
-                    stmt2.setInt(primaryKeyDB,pairList.get(tag));
-                    stmt2.executeQuery();
+                    stmt2.setInt(1, primaryKeyDB);
+                    stmt2.setInt(2,pairList.get(tag));
+                    stmt2.executeUpdate();
                 }
             }
 
@@ -88,22 +95,6 @@ public class TouristRepository {
 
     }
 
-
-
-    public TouristAttraction getAttraction(String name){
-
-
-        TouristAttraction attraction = null;
-        for (TouristAttraction obj : listOfAttractions){
-            if (name.equals(obj.getName())){
-                attraction = obj;
-            }
-        }
-
-        return attraction;
-    }
-
-
     public String updateAttraction(String attraction, TouristAttraction update){
         String message = "nothing was updated";
 
@@ -129,18 +120,34 @@ public class TouristRepository {
 
     //delete function
     public String deleteAttraction(String name){
-        String deleteAttraction = "object was deleted";
+        int primaryKeyDB = 0;
 
-        Iterator<TouristAttraction> iterator = listOfAttractions.iterator();
 
-        while (iterator.hasNext()){
-            TouristAttraction attraction = iterator.next();
-            if (attraction.getName().equals(name)){
-                iterator.remove();
-            }
+        try {
+            Connection conn = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
+
+            String getKey = "SELECT attractionID FROM attraction WHERE name = ? ";
+            PreparedStatement stmt = conn.prepareStatement(getKey);
+            stmt.setString(1,name);
+
+            ResultSet primaryKey = stmt.executeQuery();
+            primaryKey.next(); //Den skal være der fordi vi skal rykke coursen til første række.
+
+
+            primaryKeyDB = primaryKey.getInt(1);
+
+
+            String deleteAttraction = "delete from attraction where attractionID = ?";
+            PreparedStatement stmt2 = conn.prepareStatement(deleteAttraction);
+            stmt2.setInt(1,primaryKeyDB);
+            stmt2.executeUpdate();
+
+            return  "object was deleted";
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        return deleteAttraction;
     }
 
 // *********************** ---------- DATABASE METHODS ------------ ************************** //
