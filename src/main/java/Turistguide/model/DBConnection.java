@@ -6,16 +6,11 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private String URL;
-    private String Admin;
-    private String Password;
-
     public DBConnection(){
     }
 
     public Connection getConnection(String URL, String Admin, String Password){
         Connection conn = null;
-
 
         try {
             Connection contemp = DriverManager.getConnection(URL,Admin,Password);

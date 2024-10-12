@@ -28,29 +28,26 @@ public class TouristService {
     }
 
 
-    //Database method
+    /// ************************** Get infomation from database *********************** ///
     public List<TouristAttraction> allTouristAttractions(){
         return touristRepository.getAttractions();
     }
-
 
     // this is to get specific attraction to the controller.
     public TouristAttraction getAttraction(String name){
         return touristRepository.getAttractionDb(name);
     }
 
-    //This is to update
-
+    /// ************************* Update and remove from database *********************** ///
     public String updateAttraction(String attraction, TouristAttraction obj){
         return touristRepository.updateAttraction(attraction, obj);
     }
 
-    // this is to delete
     public String deleteAttraction(String name){
         return touristRepository.deleteAttraction(name);
     }
 
-
+    // *** Helper functions for Thymleaf *** //
     public List<String> getListOfCities(){
         return touristRepository.getListOfCities();
     }

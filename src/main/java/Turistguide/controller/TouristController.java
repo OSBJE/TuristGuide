@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,9 +53,10 @@ public class TouristController {
 
     // This method allow us to save our stored values when creating a new object
     @PostMapping("/save")
-    public String saveTouristAttraction(@ModelAttribute TouristAttraction obj){
-        touristService.addTouristAttraction(obj);
-        return "redirect:/welcome/attractionList";
+    public String saveTouristAttraction(@ModelAttribute TouristAttraction obj, Model model ){
+         touristService.addTouristAttraction(obj);
+         return "redirect:/welcome/attractionList";
+
     }
 
 

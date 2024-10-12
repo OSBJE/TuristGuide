@@ -5,6 +5,7 @@ import Turistguide.model.TouristAttraction;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.ErrorResponseException;
 
 
 import java.sql.*;
@@ -27,6 +28,8 @@ public class TouristRepository {
     public TouristRepository(){
     }
 
+    //PostConstruct runes functions after we have generated the constructor
+    //remove problem with beans.
     @PostConstruct
     public void setConn() {
         this.conn = new DBConnection().getConnection(dbUrl,dbUsername,dbPassword);
@@ -36,6 +39,11 @@ public class TouristRepository {
 
     public void addTouristAttraction(String city, String name, String description, List<String> tags) {
         int primaryKeyDB = 0;
+
+        // Check if an attractions exits and throws and error to thymleaf
+        List<TouristAttraction> list = this.getAttractions();
+
+        // Updated code
 
         try {
             String sqlString = "insert into attraction (Name, CityID, Description ) VALUES(?,(SELECT CityID from city where name = ?),?)";
@@ -216,15 +224,14 @@ public class TouristRepository {
     public TouristAttraction getAttractionDb(String name) {
         TouristAttraction  attraction = null;
 
-        String sql = "SELECT a.Name as attraction_name, a.Description, c.Name as city_name, t.Name as tag_name " +
-                "FROM Attraction a " +
-                "LEFT JOIN City c ON a.CityID = c.CityID " +
-                "LEFT JOIN Attraction_Tag at ON a.AttractionID = at.AttractionID " +
-                "LEFT JOIN Tags t ON at.TagID = t.TagID " +
-                "where a.Name = ?";
-
-
         try {
+            String sql = "SELECT a.Name as attraction_name, a.Description, c.Name as city_name, t.Name as tag_name " +
+                    "FROM Attraction a " +
+                    "LEFT JOIN City c ON a.CityID = c.CityID " +
+                    "LEFT JOIN Attraction_Tag at ON a.AttractionID = at.AttractionID " +
+                    "LEFT JOIN Tags t ON at.TagID = t.TagID " +
+                    "where a.Name = ?";
+
             PreparedStatement preparedStatement= conn.prepareStatement(sql);
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();

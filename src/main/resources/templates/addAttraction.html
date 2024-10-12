@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="~{layout :: head}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="wrapper">
@@ -9,8 +10,9 @@
         <h1 class="title">Add a new attraction</h1>
     <form th:action="@{/welcome/save}" th:object="${obj}" method="post">
         <div class="form-group">
-        <label for="name">Name</label>
-        <input class="text-input" type="text" id="name" th:field="*{name}">
+            <label for="name">Name</label>
+            <input class="text-input" type="text" id="name" th:field="*{name}">
+            <span th:if="${errorMessage}" style="color: red;" th:text="${errorMessage}"></span> <!-- Display error message -->
         </div>
         <br><br>
         <div class="form-group">

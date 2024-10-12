@@ -3,6 +3,7 @@ package Turistguide.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class TouristAttraction {
 
     private String city;
@@ -17,11 +18,8 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-    //TODO
-    // Some logic there makes sure you cannot add blank names and descriptions
     public TouristAttraction(){
     }
-
 
     ///**************** Get and Setters ***************///
 
@@ -56,8 +54,5 @@ public class TouristAttraction {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
 
 }
