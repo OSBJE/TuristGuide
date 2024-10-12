@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 <tr th:each="TouristAttraction : ${attractionList}">
-                    <td th:text="${TouristAttraction.getCity().getName()}">
+                    <td th:text="${TouristAttraction.getCity()}">
                     <td th:text="${TouristAttraction.name}"/>
                     <td th:text="${TouristAttraction.description}"/>
                     <td>
