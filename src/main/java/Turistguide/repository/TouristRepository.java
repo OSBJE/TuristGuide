@@ -1,6 +1,8 @@
 package Turistguide.repository;
 
+import Turistguide.model.DBConnection;
 import Turistguide.model.TouristAttraction;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -19,23 +21,26 @@ public class TouristRepository {
     @Value("${spring.datasource.password}")
     private String dbPassword;
 
-    private List<TouristAttraction> listOfAttractions = new ArrayList<>();
+    private Connection conn;
 
 
     public TouristRepository(){
 
     }
 
+    @PostConstruct
+    public void setConn(){
+        this.conn = new DBConnection().getConnection(dbUrl,dbUsername,dbPassword);
+    }
 
     public void addTouristAttraction(String city, String name, String description, List<String> tags){
         int primaryKeyDB = 0;
 
         try {
-            Connection con = DriverManager.getConnection(dbUrl,dbUsername,dbPassword);
 
             String sqlString = "insert into attraction (Name, CityID, Description ) VALUES(?,(SELECT CityID from city where name = ?),?)";
 
-            PreparedStatement stmt = con.prepareStatement(sqlString, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = conn.prepareStatement(sqlString, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1,name);
             stmt.setString(2,city);
             stmt.setString(3,description);
@@ -55,7 +60,7 @@ public class TouristRepository {
 
                     String sqlString2 = "insert into attraction_tag (AttractionID, tagID) VALUES (?, ?)";
 
-                    PreparedStatement stmt2 = con.prepareStatement(sqlString2);
+                    PreparedStatement stmt2 = conn.prepareStatement(sqlString2);
                     stmt2.setInt(1, primaryKeyDB);
                     stmt2.setInt(2,pairList.get(tag));
                     stmt2.executeUpdate();

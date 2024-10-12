@@ -10,8 +10,7 @@ public class DBConnection {
     private String Admin;
     private String Password;
 
-    public DBConnection(String URL, String Admin, String Password){
-
+    public DBConnection(){
     }
 
     public Connection getConnection(String URL, String Admin, String Password){
