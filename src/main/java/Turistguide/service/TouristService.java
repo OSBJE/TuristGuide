@@ -6,12 +6,13 @@ import Turistguide.model.TouristAttraction;
 import Turistguide.repository.TouristRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
 public class TouristService {
 
-    private final TouristRepository touristRepository;
+    private TouristRepository touristRepository;
 
     public TouristService(TouristRepository repository){
         this.touristRepository = repository;
@@ -21,10 +22,9 @@ public class TouristService {
     // to create an new attraction
     //TODO
     // this logic should be inside TouristRepository
-    public TouristAttraction addTouristAttraction(TouristAttraction attraction){
+    public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
         touristRepository.addTouristAttraction(attraction.getCity(), attraction.getName(),attraction.getDescription(), attraction.getTags());
         return touristRepository.getAttractionDb(attraction.getName());
-
     }
 
 
