@@ -54,8 +54,16 @@ public class TouristController {
     // This method allow us to save our stored values when creating a new object
     @PostMapping("/save")
     public String saveTouristAttraction(@ModelAttribute TouristAttraction obj, Model model ){
-         touristService.addTouristAttraction(obj);
-         return "redirect:/welcome/attractionList";
+        try {
+            touristService.addTouristAttraction(obj);
+            return "redirect:/welcome/attractionList";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("obj", obj);
+            model.addAttribute("tags", touristService.getListOfTags());
+            model.addAttribute("CityNames", touristService.getListOfCities());
+            return "addAttraction";
+        }
 
     }
 
