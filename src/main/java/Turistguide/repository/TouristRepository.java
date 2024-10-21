@@ -263,7 +263,7 @@ public class TouristRepository {
 
     /// ***************************** Helper function to get infomration ************************* ///
 
-    // *** Helper function to get out tagsID and cityID for updating it in DB
+    // *** Helper function to get out tagsID and cityID for updating it in DB *** //
     public Map<String, Integer> getTagsId(){
         Map<String, Integer> pairList = new HashMap<>();
 

@@ -9,7 +9,7 @@ public class DBConnection {
     public DBConnection(){
     }
 
-    public Connection getConnection(String URL, String Admin, String Password){
+    public static Connection getConnection(String URL, String Admin, String Password){
         Connection conn = null;
 
         try {
