@@ -356,4 +356,21 @@ public class TouristRepository {
         return list;
     }
 
+    public boolean checkIfObjectExists(String name) {
+        String sql = "SELECT COUNT(*) FROM attraction WHERE name = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch(SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
+
+
+
 }

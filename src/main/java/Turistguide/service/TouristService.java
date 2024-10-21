@@ -23,6 +23,9 @@ public class TouristService {
     //TODO
     // this logic should be inside TouristRepository
     public TouristAttraction addTouristAttraction(TouristAttraction attraction) {
+        if (touristRepository.checkIfObjectExists(attraction.getName())) {
+            throw new IllegalArgumentException("A tourist attraction with that name already exists");
+        }
         touristRepository.addTouristAttraction(attraction.getCity(), attraction.getName(),attraction.getDescription(), attraction.getTags());
         return touristRepository.getAttractionDb(attraction.getName());
     }

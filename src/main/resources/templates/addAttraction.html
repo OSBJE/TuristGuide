@@ -12,8 +12,9 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input class="text-input" type="text" id="name" th:field="*{name}">
-            <span th:if="${errorMessage}" style="color: red;" th:text="${errorMessage}"></span> <!-- Display error message -->
         </div>
+        <!-- Display error message -->
+            <span th:if="${errorMessage}" style="color: red;" th:text="${errorMessage}"></span>
         <br><br>
         <div class="form-group">
         <label for="description">Description</label>

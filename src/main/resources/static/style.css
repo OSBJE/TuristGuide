@@ -116,7 +116,15 @@ footer {
     color: white;
     padding: 40px 0;
     text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
+
+div.content {
+    flex: 1;
+}
+
 
 footer h5 {
     font-size: 1.2rem;
