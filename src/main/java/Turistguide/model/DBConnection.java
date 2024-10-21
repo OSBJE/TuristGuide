@@ -5,12 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
+    private static Connection conn;
 
-    public DBConnection(){
+
+    private DBConnection(){
     }
 
     public static Connection getConnection(String URL, String Admin, String Password){
-        Connection conn = null;
+
+        if (conn != null){return conn;}
 
         try {
             Connection contemp = DriverManager.getConnection(URL,Admin,Password);

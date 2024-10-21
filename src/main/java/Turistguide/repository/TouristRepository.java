@@ -32,7 +32,7 @@ public class TouristRepository {
     //remove problem with beans.
     @PostConstruct
     public void setConn() {
-        this.conn = new DBConnection().getConnection(dbUrl,dbUsername,dbPassword);
+        this.conn = DBConnection.getConnection(dbUrl,dbUsername,dbPassword);
     }
 
     /// **************************** Add and modify database functions ******************** ///
