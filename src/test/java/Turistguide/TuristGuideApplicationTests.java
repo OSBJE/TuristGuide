@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @ActiveProfiles("h2")
 class TuristGuideApplicationTests {
+	@Test
+	void contextLoads() {
+	}
 
 	@Autowired
 	TouristRepository repository;
@@ -23,8 +26,6 @@ class TuristGuideApplicationTests {
 	}
 
 
-	@Test
-	void contextLoads() {
-	}
+
 
 }
