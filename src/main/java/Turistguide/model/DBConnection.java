@@ -19,6 +19,7 @@ public class DBConnection {
             Connection contemp = DriverManager.getConnection(URL,Admin,Password);
             conn = contemp;
         } catch (SQLException e) {
+            System.out.println("not working");
             throw new RuntimeException(e);
         }
 
