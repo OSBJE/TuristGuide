@@ -11,12 +11,13 @@
 
 
 .list{
-    min-height: 100vh;
+    min-height: auto;
     background: url(../images/backgroundAttractionList.jpg)center / cover /*#ffcb05*/;
-
     display: flex;
     justify-content: center; /* Sætter vores table i midten*/
     align-items: center;
+    padding-bottom: 20px;
+
 }
 
 
@@ -33,14 +34,14 @@ td img {
 
 main.table{
     width: 82vw;
-    height: 90vh;
+    height: 800px;
     background-color: #fff5;
-
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
-
     overflow: hidden;
+    margin-bottom: 40px;
+
 }
 
 .table_header{
@@ -52,10 +53,11 @@ main.table{
 
 .table_body{
     width: 95%;
-    max-height: calc(89%- 1.6rem);
+    max-height: 600px;
     background-color: #fffb;
     margin: .8rem auto;
     border-radius: .6rem;
+
 
     overflow: auto;
 }
@@ -131,10 +133,11 @@ button:hover {
 
 .submitButton{
     position: absolute;    /* Positioned relative to .page-container */
-    left: 17%;             /* Horizontal center alignment */
+    left: 20%;             /* Horizontal center alignment */
     transform: translateX(-50%); /* Perfect centering */
     padding: 10px 20px;
     font-size: 16px;
+    top: 92%;
 
 
 }
