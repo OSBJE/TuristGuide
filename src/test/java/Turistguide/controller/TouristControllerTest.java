@@ -8,6 +8,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
+import static org.hamcrest.Matchers.*;
+
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,16 +51,19 @@ class TouristControllerTest {
 
 
     }
-    /*For some reason, it is the same object, but the memory reference is different
+
     @Test
     void createTouristAttraction() throws Exception {
         mockMvc.perform(get("/welcome/addAttraction"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("obj"))
-                .andExpect(model().attribute("obj", touristAttraction))
+                .andExpect(model().attribute("obj", hasProperty("name", nullValue())))
+                .andExpect(model().attribute("obj", hasProperty("description", nullValue())))
+                .andExpect(model().attribute("obj", hasProperty("city", nullValue())))
+                .andExpect(model().attribute("obj", hasProperty("tags", notNullValue())))
                 .andExpect(view().name("addAttraction"));
     }
-     */
+
 
     @Test
     void saveTouristAttraction() throws Exception {
