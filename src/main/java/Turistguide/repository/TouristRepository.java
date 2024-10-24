@@ -184,7 +184,7 @@ public class TouristRepository {
                 "left join Tags t on at.TagID = t.TagID";
 
         try {
-            Statement preparedStatement = conn.prepareStatement(sql);
+            Statement preparedStatement = conn.createStatement();
             ResultSet resultSet = preparedStatement.executeQuery(sql);
 
 
