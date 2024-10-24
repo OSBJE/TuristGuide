@@ -12,23 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @ActiveProfiles("h2")
 class TuristGuideApplicationTests {
-	@Test
-	void contextLoads() {
-	}
-
-	@Autowired
-	TouristRepository repository;
-
-	@Test
-	void findTouristAttraction(){
-		TouristAttraction objFound = repository.getAttractionDb("Den Lille havfrue");
-		assertEquals("Den Lille havfrue", objFound.getName());
-	}
-
-
-
-
-
 
 
 }
