@@ -9,8 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
-@ActiveProfiles("h2")
+
 class TuristGuideApplicationTests {
 
 
