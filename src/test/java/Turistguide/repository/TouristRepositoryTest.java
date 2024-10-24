@@ -2,16 +2,14 @@ package Turistguide.repository;
 
 
 import Turistguide.model.TouristAttraction;
-import Turistguide.repository.TouristRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -22,18 +20,20 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles("h2")
 public class TouristRepositoryTest {
 
+    @Autowired
+    TouristRepository repository;
+
     @Test
     void contextLoads() {
     }
 
-    @Autowired
-    TouristRepository repository;
 
     @Test
     void getAttractionDb(){
         TouristAttraction objFound = repository.getAttractionDb("Den Lille havfrue");
         assertEquals("Den Lille havfrue", objFound.getName());
     }
+
 
     @Test
     void deleteAttraction(){
@@ -46,7 +46,11 @@ public class TouristRepositoryTest {
 
         TouristAttraction controlObj = repository.getAttractionDb("Rundetårn");
         assertNotNull(controlObj);
+        //Temporary fix for persistance bug
+        repository.addTouristAttraction("København", "Den Lille havfrue", "H.C. Andersen værk", Arrays.asList("Gratis", "Børnevenlig", "Kunst", "Natur"));
+
     }
+
 
     @Test
     void getListOfCities(){
@@ -70,9 +74,12 @@ public class TouristRepositoryTest {
 
     @Test
     void addTouristAttraction() {
+        System.out.println(repository.getAttractions().size());
+        List<TouristAttraction> liste = repository.getAttractions();
 
         repository.addTouristAttraction("Odense", "H.C. Andersen Hus", "H.C. Andersens fødehjem", Arrays.asList("Børnevenlig", "Kunst"));
         String touristAttractionNotInDb = "Kronborg";
+
 
         int expectedDbSize = 4;
         int actualSize = repository.getAttractions().size();
@@ -80,13 +87,40 @@ public class TouristRepositoryTest {
 
         TouristAttraction actualTouristAttraction = repository.getAttractionDb("H.C. Andersen Hus");
 
+        System.out.println(expectedDbSize + " " + actualSize);
         assertEquals("H.C. Andersen Hus", actualTouristAttraction.getName());
         assertNotEquals(touristAttractionNotInDb, actualTouristAttraction.getName());
         assertEquals(expectedDbSize, actualSize);
+        //Temporary fix
+        repository.deleteAttraction("H.C. Andersen Hus");
 
 
 
     }
+
+    @Test
+    void getAttractions() {
+        //Arrange
+        List<TouristAttraction> expectedList = new ArrayList<>();
+
+
+        TouristAttraction t1 = repository.getAttractionDb("Rundetårn");
+        TouristAttraction t2 = repository.getAttractionDb("Rosenborg");
+        TouristAttraction t3 = repository.getAttractionDb("Den Lille havfrue");
+        expectedList.add(t1);    expectedList.add(t2);    expectedList.add(t3);
+
+        //Act
+        List<TouristAttraction> actualList = repository.getAttractions();
+
+
+        //Assert
+        assertEquals(expectedList.get(0).getName(), actualList.get(0).getName());
+        assertEquals(expectedList.get(1).getName(), actualList.get(1).getName());
+        assertEquals(expectedList.get(2).getName(), actualList.get(2).getName());
+        assertEquals(expectedList.size(), actualList.size());
+    }
+
+
 
     @Test
     void checkIfObjectExists() {
