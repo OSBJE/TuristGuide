@@ -1,4 +1,3 @@
-
 drop table if exists City;
 create table City(
 	CityID int auto_increment primary key,

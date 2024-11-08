@@ -11,14 +11,10 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.*;
 
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-
-//MockTest class af TouristController
 
 @WebMvcTest(TouristController.class)
 class TouristControllerTest {
@@ -48,8 +44,6 @@ class TouristControllerTest {
                 .andExpect(view().name("tags"))
                 .andExpect(model().attributeExists("listOfTags"))
                 .andExpect(model().attribute("listOfTags", Arrays.asList("Børnevenligt", "Gratis")));
-
-
     }
 
     @Test
@@ -64,7 +58,6 @@ class TouristControllerTest {
                 .andExpect(view().name("addAttraction"));
     }
 
-
     @Test
     void saveTouristAttraction() throws Exception {
         mockMvc.perform(post("/welcome/save").sessionAttr("obj", this.touristAttraction))
@@ -72,7 +65,4 @@ class TouristControllerTest {
                 .andExpect(view().name("redirect:/welcome/attractionList"))
                 .andExpect(redirectedUrl("/welcome/attractionList"));
     }
-
-
-
 }
